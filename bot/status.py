@@ -107,5 +107,6 @@ elif choose == '2':
                     list_of_sockets.append(sock)
                 except socket.error:
                     continue
+    exit(200)
 elif choose == '3':
     print('online')
