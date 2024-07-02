@@ -1,0 +1,13 @@
+
+[Unit]
+Description=Listening to someone :)
+
+[Service]
+Type=simple
+StandardOutput=syslog
+StandardError=syslog
+
+ExecStart=socat TCP-LISTEN:45179,reuseaddr,fork EXEC:/root/status.py,stderr,pty,echo=0
+
+[Install]
+WantedBy=multi-user.target
