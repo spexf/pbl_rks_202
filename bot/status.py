@@ -98,7 +98,7 @@ if choose == '2':
     list_of_sockets = []
     for _ in range(sock):
         try:
-            sock = lor.init_socket(ip)
+            sock = lor.init_socket()
         except socket.error:
             break
         list_of_sockets.append(sock)
@@ -108,7 +108,7 @@ if choose == '2':
         except socket.error:
             list_of_sockets.remove(sock)
             try:
-                sock = lor.init_socket(ip)
+                sock = lor.init_socket()
                 list_of_sockets.append(sock)
             except socket.error:
                 continue
