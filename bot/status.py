@@ -4,9 +4,6 @@ import random
 import threading
 from scapy.all import IP, TCP, send
 import threading
-import sys
-import argparse
-import logging
 import socket
 import time
 
