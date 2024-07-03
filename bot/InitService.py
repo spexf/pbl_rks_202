@@ -1,5 +1,4 @@
 import requests
-import socket
 import random
 import netifaces
 from string import ascii_letters, digits
