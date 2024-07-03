@@ -3,7 +3,6 @@
 import random
 import threading
 from scapy.all import IP, TCP, send, Raw
-import threading
 import socket
 import time
 
@@ -11,9 +10,6 @@ choose = input('')
 
 def ping():
     return 'online'
-
-def slowloris():
-    pass
 
 class Synflood:
     def __init__(self, ip, port, thread, time_end=10):
